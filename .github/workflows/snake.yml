@@ -2,14 +2,14 @@ name: Generate Snake Animation
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # daily
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo  # ✅ Required to push output branch
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Generate Snake
@@ -25,5 +25,6 @@ jobs:
         with:
           target_branch: output
           build_dir: dist
+          force_orphan: true   # 🪄 Important fix
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
